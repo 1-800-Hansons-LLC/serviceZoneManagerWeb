@@ -1,0 +1,129 @@
+<div *ngIf="type_name=='addZone'">
+  <h2 mat-dialog-title>Add Zone</h2>
+  <div class="container-fluid">
+    <div class="row mt-3">
+     <div class="col"  style="display: flex; align-content: center;">
+        <h4 class="col-4">Zone Details:</h4>
+        <input style="width: 80%; height: -webkit-fill-available; font-family: fangsong;" type="text" name="" value="" matInput [(ngModel)]="data.zoneDetail">
+     </div>
+   </div>
+   <div class="row mt-3">
+    <div class="col"  style="display: flex; align-content: center;">
+       <h4 class="col-4">Zone Description:</h4>
+       <input style="width: 80%; height: -webkit-fill-available; font-family: fangsong;" type="text" name="" value="" matInput [(ngModel)]="data.zoneDescription">
+    </div>
+  </div>
+   <div class="row mt-3">
+    <div class="col"  style="display: flex; align-content: center;">
+       <h4 class="col-4">Branch:</h4>
+       <select style= "width: 80%; height: 25px; font-family: fangsong;" [(ngModel)]="data.selectDivision">
+          <option value="" disabled selected hidden>----Please Select a Branch-----</option>
+          <option  *ngFor="let i of division" [value]="i.divisionID">{{i.divisionName}}</option>
+        </select>
+    </div>
+  </div>
+  <div align="center" class="mb-3">
+    <button mat-stroked-button color="primary" style="margin: 5px;" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    <button mat-stroked-button color="primary" style="margin: 5px;" mat-dialog-close>Cancel</button>
+  </div>
+  </div>
+</div>
+
+<div *ngIf="type_name=='editZone'">
+  <h2 mat-dialog-title>Edit Zone</h2>
+  <div class="container-fluid">
+    <div class="row mt-3">
+     <div class="col"  style="display: flex; align-content: center;">
+        <h4 class="col-4">Zone Details:</h4>
+        {{data.zoneDetail.zone}}| Branch: {{data.zoneDetail.division}}
+     </div>
+   </div>
+   <div class="row mt-3">
+    <div class="col"  style="display: flex; align-content: center;">
+       <h4 class="col-4">Zone:</h4>
+       <input style="width: 80%; height: -webkit-fill-available; font-family: fangsong;" type="text" name="" value="" matInput [(ngModel)]="data.zoneName">
+    </div>
+  </div>
+
+  <div align="center" class="mb-3">
+    <button mat-stroked-button color="primary" style="margin: 5px;" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    <button mat-stroked-button color="primary" style="margin: 5px;" mat-dialog-close>Cancel</button>
+  </div>
+  </div>
+</div>
+
+
+<div *ngIf="type_name=='Confirm'">
+  <h2 mat-dialog-title>Remove Zone</h2>
+  <div mat-dialog-content >{{data.message}}</div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Remove</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </div>
+</div>
+
+<div *ngIf="type_name=='Notification'">
+  <div mat-dialog-content >{{data.message}}</div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close cdkFocusInitial>OK</button>
+  </div>
+</div>
+
+<div *ngIf="type_name=='addZip'">
+  <h2 mat-dialog-title>Add Zip</h2>
+  <div class="container-fluid">
+    <div class="row mt-3">
+     <div class="col"  style="display: flex;  align-content: center;">
+        <h4 class="col-4">Zone Detail:</h4>
+        Zone: {{zoneDetail.zone}} | Division: {{zoneDetail.division}}
+     </div>
+   </div>
+   <div class="row mt-3">
+    <div class="col"  style="display: flex;  align-content: center;">
+       <h4 class="col-4">Zip Code:</h4>
+       <select style= "width: 80%; height: 25px; font-family: fangsong;" [(ngModel)]="data.selectZip">
+          <option value="" disabled selected hidden>----Please Select a Zip Code-----</option>
+          <option  *ngFor="let i of zipList" [value]="i.id">{{i.zipcode}}</option>
+        </select>
+    </div>
+  </div>
+  <div align="center" class="mb-3">
+    <button mat-stroked-button color="primary" style="margin: 5px;" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    <button mat-stroked-button color="primary" style="margin: 5px;" mat-dialog-close>Cancel</button>
+  </div>
+  </div>
+</div>
+
+<div *ngIf="type_name=='removeZip'">
+  <h2 mat-dialog-title>Remove Zip</h2>
+  <div mat-dialog-content >{{data.message}}</div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Remove</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </div>
+</div>
+
+<div *ngIf="type_name=='moveZip'">
+  <h2 mat-dialog-title>Move Zip</h2>
+  <div class="container-fluid">
+    <div class="row mt-3">
+     <div class="col"  style="display: flex;  align-content: center;">
+        <h4 class="col-4">Zipcode:</h4>
+          {{zipDetail.zipcode}}
+     </div>
+   </div>
+   <div class="row mt-3">
+    <div class="col"  style="display: flex;  align-content: center;">
+       <h4 class="col-4">Zone:</h4>
+       <select style= "width: 80%; height: 25px; font-family: fangsong;" [(ngModel)]="data.selectZone">
+          <option value="" disabled selected hidden>----Please Select a Zone-----</option>
+          <option  *ngFor="let i of zoneList" [value]="i.id"><b>Zone:</b> {{i.zone}} | Branch: {{i.division}}</option>
+      </select>
+    </div>
+  </div>
+  <div align="center" class="mb-3">
+    <button mat-stroked-button color="primary" style="margin: 5px;" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    <button mat-stroked-button color="primary" style="margin: 5px;" mat-dialog-close>Cancel</button>
+  </div>
+  </div>
+</div>
