@@ -11,7 +11,7 @@ export class RestApiService
 {
   // Base URI
 
- apiURL =  'https://servermule.hansons.com:8081/api/serviceZoneManager/';
+ apiURL =  'https://localhost:8081/api/serviceZoneManager/';
 
   constructor(private http: HttpClient) {}
 
@@ -38,7 +38,7 @@ export class RestApiService
   getDivisionNZipcodeList(): Observable<any>
   {
     return this.http
-      .get<any>(this.apiURL+ 'serviceZoneManagerDivisions' , this.httpOptions)
+      .get<any>(this.apiURL+ 'divisions' , this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -51,7 +51,7 @@ export class RestApiService
     {
       param = '?zoneId='+ queryParam;
       return this.http
-        .get<any>(this.apiURL+ 'serviceZoneManagerZip' + param , this.httpOptions)
+        .get<any>(this.apiURL+ 'zip' + param , this.httpOptions)
         .pipe(
           retry(1),
           catchError(this.handleError)
@@ -60,7 +60,7 @@ export class RestApiService
     else
     {
       return this.http
-        .get<any>(this.apiURL+ 'serviceZoneManagerZip' , this.httpOptions)
+        .get<any>(this.apiURL+ 'zip' , this.httpOptions)
         .pipe(
           retry(1),
           catchError(this.handleError)
@@ -70,7 +70,7 @@ export class RestApiService
   getZipcodeListByZoneId(queryParam: number): Observable<any>
   {
       return this.http
-        .get<any>(this.apiURL+ 'serviceZoneManagerZipCodeByZone/'+  queryParam, this.httpOptions)
+        .get<any>(this.apiURL+ 'zipCodeByZone/'+  queryParam, this.httpOptions)
         .pipe(
           retry(1),
           catchError(this.handleError)
@@ -83,7 +83,7 @@ export class RestApiService
     {
       param = '?branchId='+ queryParam;
       return this.http
-        .get<any>(this.apiURL+ 'serviceZoneManagerZone' + param, this.httpOptions)
+        .get<any>(this.apiURL+ 'zone' + param, this.httpOptions)
         .pipe(
           retry(1),
           catchError(this.handleError)
@@ -92,7 +92,7 @@ export class RestApiService
     else
     {
       return this.http
-        .get<any>(this.apiURL+ 'serviceZoneManagerZone' , this.httpOptions)
+        .get<any>(this.apiURL+ 'zone' , this.httpOptions)
         .pipe(
           retry(1),
           catchError(this.handleError)
@@ -103,7 +103,7 @@ export class RestApiService
   {
     debugger;
     return this.http
-      .post<any>(this.apiURL + 'serviceZoneManagerAddZone', JSON.stringify(body), this.httpOptionsContent)
+      .post<any>(this.apiURL + 'addZone', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
         catchError(this.handleError)
       );
@@ -112,7 +112,7 @@ export class RestApiService
   {
     debugger;
     return this.http
-      .put<any>(this.apiURL + 'serviceZoneManagerRemoveZone', JSON.stringify(body), this.httpOptionsContent)
+      .put<any>(this.apiURL + 'removeZone', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
         catchError(this.handleError)
       );
@@ -121,7 +121,7 @@ export class RestApiService
   {
     debugger;
     return this.http
-      .post<any>(this.apiURL + 'serviceZoneManagerAddZip', JSON.stringify(body), this.httpOptionsContent)
+      .post<any>(this.apiURL + 'addZip', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
         catchError(this.handleError)
       );
@@ -130,7 +130,7 @@ export class RestApiService
   {
     debugger;
     return this.http
-      .put<any>(this.apiURL + 'serviceZoneManagerRemoveZip', JSON.stringify(body), this.httpOptionsContent)
+      .put<any>(this.apiURL + 'removeZip', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
         catchError(this.handleError)
       );
@@ -139,7 +139,7 @@ export class RestApiService
   {
     debugger;
     return this.http
-      .put<any>(this.apiURL + 'serviceZoneManagerMoveZip', JSON.stringify(body), this.httpOptionsContent)
+      .put<any>(this.apiURL + 'moveZip', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
         catchError(this.handleError)
       );
