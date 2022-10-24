@@ -28,25 +28,30 @@ export class AppComponent implements OnInit{
   zoneDetail: string = '';
   branch: number = 0;
   zoneName: string = '';
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     this.getServiceZoneData();
   }
-  getServiceZoneData(){
+  getServiceZoneData()
+  {
     this.getLookups();
     this.getZipcodeListByZoneId();
     this.getZip();
     this.getZone();
   }
-  getLookups(){
-    this.restApi.getDivisionNZipcodeList().subscribe((data: any) =>
+  getLookups()
+  {
+    this.restApi.getDivisionZipcodeList().subscribe((data: any) =>
     {
       this.divisionList = data.divisions;
     });
   }
-  getZip(){
+  getZip()
+  {
     let queryParam: number = 0;
-    debugger;
-    if(this.zone.id > 0){
+
+    if(this.zone.id > 0)
+    {
 
       queryParam = this.zone.id;
     }
@@ -58,21 +63,23 @@ export class AppComponent implements OnInit{
     {
       this.restApi.getZipcodeList(queryParam).subscribe((data: any) =>
       {
-        if(data != null){
+        if(data != null)
+        {
           this.typesOfZip = data.zipcode
         }
-        else{
+        else
+        {
           this.typesOfZip = [];
         }
       });
     }
-    else{
-        this.typesOfZip = [];
-    }
+
   }
-  getZipcodeListByZoneId(){
+  getZipcodeListByZoneId()
+  {
     let queryParam: number = 0;
-    if(this.zone.id > 0 ){
+    if(this.zone.id > 0 )
+    {
 
       queryParam = this.zone.id;
     }
@@ -84,22 +91,24 @@ export class AppComponent implements OnInit{
     {
       this.restApi.getZipcodeListByZoneId(queryParam).subscribe((data: any) =>
       {
-        if(data != null){
-          debugger;
+        if(data != null)
+        {
+
           this.zipcodeListByZone = data.zipcode
         }
-        else{
+        else
+        {
           this.zipcodeListByZone = [];
         }
       });
     }
-    else{
-        this.zipcodeListByZone = [];
-    }
+
   }
-  getZone(){
+  getZone()
+  {
     let queryParam: number = 0;
-    if(this.branch == 0){
+    if(this.branch == 0)
+    {
       queryParam = 0;
     }
     else
@@ -115,17 +124,20 @@ export class AppComponent implements OnInit{
           this.totalZone = this.typesOfZone;
         }
       }
-      else{
+      else
+      {
         this.typesOfZone = [];
       }
     });
   }
-  public branchChange(event: any){
+  public branchChange(event: any)
+  {
     this.getZone();
   }
-  public SelectZone(list: any){
-    if(list != []){
-      debugger;
+  public selectZoneItem(list: any)
+  {
+    if(list != [])
+    {
       this.zone =  list._value[0];
       this.disableRemoveZone = false;
       this.disableAddZip = false;
@@ -133,22 +145,25 @@ export class AppComponent implements OnInit{
       this.getZipcodeListByZoneId();
     }
   }
-  public SelectZipCode(list: any) {
-    if(list != []){
+  public selectZipCodeItem(list: any)
+  {
+    if(list != [])
+    {
       this.zip =  list._value[0];
       this.disableRemoveNMoveZip = false;
     }
   }
-  public addZone(){
+  public addZone()
+  {
     const dialogRef = this.dialog.open(DialogComponent, {
         width: '500px',
-        data: {typtOfMessage: 'addZone', division: this.divisionList, selectDivision: this.selectDivision,  zoneDetail: this.zoneDetail, zoneDescription: this.zoneDescription},
+        data: {typeOfMessage: 'addZone', division: this.divisionList, selectDivision: this.selectDivision,  zoneDetail: this.zoneDetail, zoneDescription: this.zoneDescription},
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result != "" && result != undefined){
-            debugger;
-        if(result.selectDivision !='' && result.zoneDetail != '' && result.zoneDescription != ''){
-          debugger;
+      if(result != "" && result != undefined)
+      {
+        if(result.selectDivision !='' && result.zoneDetail != '' && result.zoneDescription != '')
+        {
           let body = {
               "divisionId": Number(result.selectDivision),
               "zoneDescription": result.zoneDetail,
@@ -157,36 +172,40 @@ export class AppComponent implements OnInit{
           }
           this.restApi.postZone(body).subscribe((data: any) =>
           {
-            debugger;
-            if(data.serviceZone[0].successFlag == 1){
+
+            if(data.serviceZone[0].successFlag == 1)
+            {
               const dialogRef = this.dialog.open(DialogComponent, {
                   width: '300px',
-                  data: {message: 'Zone Added Successfully', typtOfMessage: 'Notification'},
+                  data: {message: 'Zone Added Successfully', typeOfMessage: 'Notification'},
               });
               this.getZone();
             }
-            else{
+            else
+            {
               const dialogRef = this.dialog.open(DialogComponent, {
                     width: '300px',
-                    data: {message: 'Sorry, Something went wrong! Please try again', typtOfMessage: 'Notification'},
+                    data: {message: 'Sorry, Something went wrong! Please try again', typeOfMessage: 'Notification'},
               });
             }
           });
         }
-        else{
+        else
+        {
           const dialogRef = this.dialog.open(DialogComponent, {
               width: '300px',
-              data: {message: 'Please Enter the required fields', typtOfMessage: 'Notification'},
+              data: {message: 'Please Enter the required fields', typeOfMessage: 'Notification'},
           });
         }
       }
     });
 
   }
-  public removeZone(){
+  public removeZone()
+  {
       const dialogRef = this.dialog.open(DialogComponent, {
             width: '300px',
-            data: {message: 'Are you sure you want to remove a zone - '+ this.zone.zone +' ?', typtOfMessage: 'Confirm'},
+            data: {message: 'Are you sure you want to remove a zone - '+ this.zone.zone +' ?', typeOfMessage: 'Confirm'},
       });
       dialogRef.afterClosed().subscribe(result => {
       if(result){
@@ -196,9 +215,10 @@ export class AppComponent implements OnInit{
         }
         this.restApi.deletenEditZone(body).subscribe((data: any) =>
         {
-         if(data.serviceZone[0].successFlag == 1){
+         if(data.serviceZone[0].successFlag == 1)
+         {
            const dialogRef = this.dialog.open(DialogComponent, {
-               data: {message: 'Zone Deleted Successfully!', typtOfMessage: 'Notification'},
+               data: {message: 'Zone Deleted Successfully!', typeOfMessage: 'Notification'},
            });
            this.zone = {};
     		   this.zip = {};
@@ -211,13 +231,14 @@ export class AppComponent implements OnInit{
       }
     });
   }
-  public editZone(){
+  public editZone()
+  {
     const dialogRef = this.dialog.open(DialogComponent, {
           width: '500px',
-          data: {typtOfMessage: 'editZone', zoneDetail: this.zone, zoneName: this.zoneName},
+          data: {typeOfMessage: 'editZone', zoneDetail: this.zone, zoneName: this.zoneName},
     });
     dialogRef.afterClosed().subscribe(result => {
-      debugger;
+
     if(result){
       let body = {
           "id": Number(this.zone.id),
@@ -226,9 +247,10 @@ export class AppComponent implements OnInit{
       }
       this.restApi.deletenEditZone(body).subscribe((data: any) =>
       {
-       if(data.serviceZone[0].successFlag == 1){
+       if(data.serviceZone[0].successFlag == 1)
+       {
          const dialogRef = this.dialog.open(DialogComponent, {
-             data: {message: 'Zone Updated Successfully!', typtOfMessage: 'Notification'},
+             data: {message: 'Zone Updated Successfully!', typeOfMessage: 'Notification'},
          });
          this.zone.zone = result.zoneName;
          this.getServiceZoneData();
@@ -237,63 +259,70 @@ export class AppComponent implements OnInit{
     }
   });
   }
-  public addZip(){
-    debugger
-
+  public addZip()
+  {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '500px',
-      data: {typtOfMessage: 'addZip', zipcodeList: this.zipcodeListByZone, selectZip: this.selectZip, zoneDetail: this.zone},
+      data: {typeOfMessage: 'addZip', zipcodeList: this.zipcodeListByZone, selectZip: this.selectZip, zoneDetail: this.zone},
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result != "" && result != undefined){
-      if(result.selectZone !=''){
+      if(result != "" && result != undefined)
+      {
+      if(result.selectZone !='')
+      {
         let body = {
             "zoneId": Number(this.zone.id),
             "zipcodeId": Number(result.selectZip),
         }
         this.restApi.postZip(body).subscribe((data: any) =>
         {
-          if(data.zipcode[0].successFlag == 1){
+          if(data.zipcode[0].successFlag == 1)
+          {
             const dialogRef = this.dialog.open(DialogComponent, {
                   width: '300px',
-                  data: {message: 'Zip Code Added Successfully', typtOfMessage: 'Notification'},
+                  data: {message: 'Zip Code Added Successfully', typeOfMessage: 'Notification'},
             });
             this.getServiceZoneData();
           }
-          else{
+          else
+          {
             const dialogRef = this.dialog.open(DialogComponent, {
                   width: '300px',
-                  data: {message: 'Sorry, Something went wrong! Please try again', typtOfMessage: 'Notification'},
+                  data: {message: 'Sorry, Something went wrong! Please try again', typeOfMessage: 'Notification'},
             });
           }
         });
       }
-      else{
+      else
+      {
         const dialogRef = this.dialog.open(DialogComponent, {
               width: '300px',
-              data: {message: 'Please Enter the required fields', typtOfMessage: 'Notification'},
+              data: {message: 'Please Enter the required fields', typeOfMessage: 'Notification'},
         });
       }
     }
   });
   }
-  public removeZip(){
+  public removeZip()
+  {
       const dialogRef = this.dialog.open(DialogComponent, {
             width: '300px',
-            data: {message: 'Are you sure you want to remove a zip code - '+ this.zip.zipCode +'?', typtOfMessage: 'Confirm', selectedZip : this.zip},
+            data: {message: 'Are you sure you want to remove a zip code - '+ this.zip.zipCode +'?', typeOfMessage: 'Confirm', selectedZip : this.zip},
       });
       dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if(result)
+      {
         let body = {
             "serviceId": Number(this.zip.serviceId)
         }
 
         this.restApi.deleteZip(body).subscribe((data: any) =>
         {
-            debugger;
-          if(data.zipcode[0].successFlag == 1){
+
+          if(data.zipcode[0].successFlag == 1)
+          {
             const dialogRef = this.dialog.open(DialogComponent, {
-                data: {message: 'Zipcode Deleted Successfully!', typtOfMessage: 'Notification'},
+                data: {message: 'Zipcode Deleted Successfully!', typeOfMessage: 'Notification'},
             });
             this.zip = {};
             this.disableRemoveNMoveZip = true;
@@ -303,49 +332,51 @@ export class AppComponent implements OnInit{
       }
     });
   }
-  public moveZip(){
-    debugger;
-    //filter total_zone
-
+  public moveZip()
+  {
     let zoneList = this.totalZone.filter((a: any = this.totalZone) => a.id != this.zone.id);
 
     const dialogRef = this.dialog.open(DialogComponent, {
           width: '500px',
-          data: {typtOfMessage: 'moveZip', zoneList: zoneList, selectZone: this.selectZone, zipDetail: this.zip},
+          data: {typeOfMessage: 'moveZip', zoneList: zoneList, selectZone: this.selectZone, zipDetail: this.zip},
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result != "" && result != undefined)
       {
-        debugger;
-        if(result.selectZone !=''){
+
+        if(result.selectZone !='')
+        {
           let body = {
               "serviceId": Number(this.zip.serviceId),
               "zoneId": Number(result.selectZone),
           }
           this.restApi.moveZip(body).subscribe((data: any) =>
           {
-            if(data.zipcode[0].successFlag == 1){
+            if(data.zipcode[0].successFlag == 1)
+            {
               const dialogRef = this.dialog.open(DialogComponent, {
                     width: '300px',
-                    data: {message: 'Zipcode Moved Successfully', typtOfMessage: 'Notification'},
+                    data: {message: 'Zipcode Moved Successfully', typeOfMessage: 'Notification'},
               });
               this.disableRemoveNMoveZip = true;
               this.getServiceZoneData();
             }
-            else{
+            else
+            {
               const dialogRef = this.dialog.open(DialogComponent, {
                     width: '300px',
-                    data: {message: 'Sorry, Something went wrong! Please try again', typtOfMessage: 'Notification'},
+                    data: {message: 'Sorry, Something went wrong! Please try again', typeOfMessage: 'Notification'},
               });
             }
-            debugger;
+
               console.log(data);
           });
         }
-        else{
+        else
+        {
           const dialogRef = this.dialog.open(DialogComponent, {
                 width: '300px',
-                data: {message: 'Please Enter the required fields', typtOfMessage: 'Notification'},
+                data: {message: 'Please Enter the required fields', typeOfMessage: 'Notification'},
           });
         }
     }

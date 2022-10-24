@@ -79,7 +79,7 @@
         <mat-selection-list [multiple]="false" #zone>
           <cdk-virtual-scroll-viewport [itemSize]="10" class="example-viewport">
             <div mat-subheader>Zone List</div>
-            <mat-list-option *cdkVirtualFor="let i of typesOfZone" (click)="SelectZone(zone)" [value]="i">
+            <mat-list-option *cdkVirtualFor="let i of typesOfZone" (click)="selectZoneItem(zone)" [value]="i">
                 <div mat-line><b>{{i.zone}}</b></div>
                 <div mat-line> Branch: {{i.division}} </div>
                 <div mat-line> Description: {{i.description}} </div>
@@ -105,7 +105,7 @@
         <mat-selection-list  [multiple]="false" #zip>
             <cdk-virtual-scroll-viewport [itemSize]="10" class="example-viewport-Zip">
                 <div mat-subheader>Zip Code List</div>
-                <mat-list-option *cdkVirtualFor="let i of typesOfZip" [selected]="i.selected" (click)="SelectZipCode(zip)" [value]="i">
+                <mat-list-option *cdkVirtualFor="let i of typesOfZip" [selected]="i.selected" (click)="selectZipCodeItem(zip)" [value]="i">
                   <div mat-line><b>{{i.zipCode}}</b></div>
                   <div mat-line> Zone: {{i.zone}} </div>
                   <div mat-line> Branch: {{i.division}} </div>
@@ -119,13 +119,5 @@
 
   </div>
 </div>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet></router-outlet>

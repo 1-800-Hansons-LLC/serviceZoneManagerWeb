@@ -11,7 +11,7 @@ export class RestApiService
 {
   // Base URI
 
- apiURL =  'https://localhost:8081/api/serviceZoneManager/';
+ apiURL =  'https://dev.servermule.hansons.com:8081/api/serviceZoneManager/';
 
   constructor(private http: HttpClient) {}
 
@@ -19,8 +19,8 @@ export class RestApiService
   httpOptions = {
     headers: new HttpHeaders(
     {
-      'client_secret': '383d3ab5-25c1-490b-af9c-5e1a7bbf3a0c',
-      'client_id': '40829494-9c4d-4d22-8a26-8cd3970895e8',
+      'client_secret': '7c5597ac-ee80-464b-87de-286bcb0d45e3',
+      'client_id': 'd34c7b65-9e64-4412-acff-ec8e42eebfc6',
       'proj':'serviceZoneManager'
     })
   };
@@ -28,14 +28,14 @@ export class RestApiService
   httpOptionsContent = {
   headers: new HttpHeaders(
   {
-    'client_secret': '383d3ab5-25c1-490b-af9c-5e1a7bbf3a0c',
-    'client_id': '40829494-9c4d-4d22-8a26-8cd3970895e8',
+    'client_secret': '7c5597ac-ee80-464b-87de-286bcb0d45e3',
+    'client_id': 'd34c7b65-9e64-4412-acff-ec8e42eebfc6',
     'content-type': 'application/json',
     'proj':'serviceZoneManager'
   })
 };
 
-  getDivisionNZipcodeList(): Observable<any>
+  getDivisionZipcodeList(): Observable<any>
   {
     return this.http
       .get<any>(this.apiURL+ 'divisions' , this.httpOptions)
@@ -101,7 +101,7 @@ export class RestApiService
   }
   postZone(body: any): Observable<any>
   {
-    debugger;
+
     return this.http
       .post<any>(this.apiURL + 'addZone', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
@@ -110,7 +110,7 @@ export class RestApiService
   }
   deletenEditZone(body: any): Observable<any>
   {
-    debugger;
+
     return this.http
       .put<any>(this.apiURL + 'removeZone', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
@@ -119,7 +119,7 @@ export class RestApiService
   }
   postZip(body: any): Observable<any>
   {
-    debugger;
+
     return this.http
       .post<any>(this.apiURL + 'addZip', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
@@ -128,7 +128,7 @@ export class RestApiService
   }
   deleteZip(body: any): Observable<any>
   {
-    debugger;
+
     return this.http
       .put<any>(this.apiURL + 'removeZip', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
@@ -137,7 +137,7 @@ export class RestApiService
   }
   moveZip(body: any): Observable<any>
   {
-    debugger;
+
     return this.http
       .put<any>(this.apiURL + 'moveZip', JSON.stringify(body), this.httpOptionsContent)
       .pipe(
